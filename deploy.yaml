@@ -5,7 +5,14 @@ metadata:
   labels:
     app: node-app
 spec:
+  revisionHistoryLimit: 0
   replicas: 2
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: node-app
@@ -16,10 +23,16 @@ spec:
     spec:
       containers:
       - name: node-app-image
-        image: ghcr.io/aldomatic/docker-image-host-github:latest
+        image: ghcr.io/aldomatic/docker-image-host-github
         imagePullPolicy: Always
         ports:
-        - containerPort: 3000
+          - containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
         resources:
          # Specifying the resourses that we might need for our application
            limits:
