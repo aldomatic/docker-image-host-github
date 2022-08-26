@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydeployaldomatic
+  labels:
+    app: node-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-app
+  template:
+    metadata:
+      labels:
+        app: node-app
+    spec:
+      containers:
+      - name: node-app-image
+        image: ghcr.io/aldomatic/docker-image-host-github
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        resources:
+         # Specifying the resourses that we might need for our application
+           limits:
+             memory: "128Mi"
+             cpu: "1m"
+        
