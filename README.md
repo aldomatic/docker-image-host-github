@@ -6,8 +6,8 @@ Example repo to build a docker image via actions and publish to github for hosti
 
 Create new deployment 
 
-`kube ctl create deployment -f deploy.yaml`
+`kube ctl create deployment -f [FILE NAME]`
 
-Rolling update will 
+Rolling update images to latest and restart pods 
 
-`kubectl rollout restart deploy deploy.yaml`
+`kubectl rollout restart deploy [DEPLOYMENT NAME]`
