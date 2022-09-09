@@ -6,7 +6,7 @@ const HOST = '0.0.0.0';
 
 const app = express()
 app.get('/', (req, res) => {
-    res.send(`Hola, visitor from pod:  ${os.hostname()}!`)
+    res.send(`Hi, from pod:  <strong>${os.hostname()}</strong>!`)
 })
 
 app.listen(PORT, HOST);
